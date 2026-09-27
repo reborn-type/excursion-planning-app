@@ -26,3 +26,6 @@ def division_groups(group: list, subgroup_count: int) -> list:
         subgroups.append(sub)
         
     return subgroups
+
+
+print(is_good_age_for_excoursion(20, 16))
