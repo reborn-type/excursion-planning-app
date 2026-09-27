@@ -1,0 +1,11 @@
+[
+    {
+        "user_id": 2,
+        "first_name": "Руслан",
+        "last_name": "Хинчагов",
+        "age": 29,
+        "experience": 1,
+        "email": "res@gmail.com",
+        "guide_status": true
+    }
+]
