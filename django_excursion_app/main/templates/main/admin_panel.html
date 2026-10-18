@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+{% block title %}Панель управления{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Панель управления администратора</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>Маршруты</h4>
+            <a href="{% url 'main:route_create' %}" class="btn btn-success btn-sm">Создать маршрут</a>
+        </div>
+        <ul class="list-group mb-3">
+            {% for route in routes %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ route.title }}
+                    <div>
+                        <a href="{% url 'main:route_update' route.id %}" class="btn btn-sm btn-outline-primary">Редактировать</a>
+                        <a href="{% url 'main:route_delete' route.id %}" class="btn btn-sm btn-outline-danger">Удалить</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-muted">Маршрутов пока нет</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col-md-6">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>Экскурсии</h4>
+            <a href="{% url 'main:excursion_create' %}" class="btn btn-success btn-sm">Создать экскурсию</a>
+        </div>
+        <ul class="list-group mb-3">
+            {% for exc in excursions %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ exc.title }}
+                    <div>
+                        <a href="{% url 'main:excursion_update' exc.id %}" class="btn btn-sm btn-outline-primary">Редактировать</a>
+                        <a href="{% url 'main:excursion_delete' exc.id %}" class="btn btn-sm btn-outline-danger">Удалить</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-muted">Экскурсий пока нет</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

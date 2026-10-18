@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% block title %}{{ route.title }}{% endblock %}
+
+{% block content %}
+<h2>Маршрут: {{ route.title }}</h2>
+<p class="lead">{{ route.description }}</p>
+<p><strong>Протяженность:</strong> {{ route.length_km }} км</p>
+
+<hr class="my-4">
+
+<h3>Экскурсии по маршруту</h3>
+<div class="row mt-3">
+    {% for item in excursions_info %}
+    <div class="col-md-6 mb-3">
+        <div class="card h-100 border-secondary">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.excursion.title }}</h5>
+                <p class="card-text">
+                    <strong>Цена:</strong> {{ item.excursion.price }} ₽<br>
+                    <strong>Ограничение по возрасту:</strong> {{ item.excursion.min_age }} – {{ item.excursion.max_age }} лет<br>
+                    <strong>Участники:</strong> {{ item.current_participants }} из {{ item.excursion.max_persons }} чел.
+                </p>
+
+                {% if item.is_registered %}
+                    <button class="btn btn-success w-100" disabled>✓ Вы записаны</button>
+                {% elif item.can_join %}
+                    <a href="{% url 'main:join_excursion' item.excursion.id %}" class="btn btn-primary w-100">Записаться на экскурсию</a>
+                {% else %}
+                    <button class="btn btn-secondary w-100" disabled>{{ item.reason }}</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">Для этого маршрута экскурсии пока не созданы.</p>
+    {% endfor %}
+</div>
+{% endblock %}

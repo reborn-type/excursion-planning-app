@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+{% block title %}Главная — TourManager{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3 shadow-sm text-center">
+    <div class="container-fluid py-4">
+        <h1 class="display-5 fw-bold mb-3">Добро пожаловать в TourManager!</h1>
+        <p class="col-md-8 mx-auto fs-5 text-muted mb-4">
+            Удобная платформа для поиска увлекательных маршрутов, выбора экскурсий с учетом вашего возраста и быстрой записи.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'main:route_list' %}" class="btn btn-primary btn-lg">Смотреть маршруты</a>
+            {% if not user.is_authenticated %}
+                <a href="{% url 'main:register' %}" class="btn btn-outline-secondary btn-lg">Зарегистрироваться</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row text-center mt-5">
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 border-0 shadow-sm p-3">
+            <div class="card-body">
+                <h3>Маршруты</h3>
+                <p class="text-muted">Исследуйте разнообразные туристические маршруты и выбирайте лучшие направления.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 border-0 shadow-sm p-3">
+            <div class="card-body">
+                <h3>Экскурсии</h3>
+                <p class="text-muted">Записывайтесь на экскурсии с автоматической проверкой доступных мест и возрастных ограничений.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 border-0 shadow-sm p-3">
+            <div class="card-body">
+                <h3>Управление</h3>
+                <p class="text-muted">Администраторы могут гибко управлять контентом, добавляя новые маршруты и экскурсии.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

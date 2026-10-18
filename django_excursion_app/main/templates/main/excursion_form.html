@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+{% block title %}{{ action }} экскурсию{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title mb-4">{{ action }} экскурсию</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success w-100">Сохранить</button>
+                </form>
+                <a href="{% url 'main:admin_panel' %}" class="btn btn-secondary w-100 mt-2">Назад в панель</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

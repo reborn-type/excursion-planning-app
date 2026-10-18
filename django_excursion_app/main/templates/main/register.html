@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">Регистрация нового пользователя</h3>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Имя:</label>
+                        {{ form.first_name }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Фамилия:</label>
+                        {{ form.last_name }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Возраст (от 18 до 100 лет):</label>
+                        {{ form.age }}
+                        {% if form.age.errors %}
+                            <div class="text-danger small mt-1">{{ form.age.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">Зарегистрироваться</button>
+                </form>
+                
+                <div class="mt-3 text-center">
+                    <small>Уже зарегистрированы? <a href="{% url 'main:login' %}">Войти по ID</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

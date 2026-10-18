@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+{% block title %}Доступные маршруты{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Все маршруты</h2>
+    {% if user.is_staff %}
+        <a href="{% url 'main:admin_panel' %}" class="btn btn-warning">⚙️ Управление в панели</a>
+    {% endif %}
+</div>
+
+<div class="row">
+    {% for route in routes %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ route.title }}</h5>
+                <p class="card-text text-muted flex-grow-1">
+                    {{ route.description|truncatewords:20 }}
+                </p>
+                <div class="mb-3">
+                    <span class="badge bg-info text-dark">
+                        Протяженность: {{ route.length_km }} км
+                    </span>
+                </div>
+                <a href="{% url 'main:route_detail' route.pk %}" class="btn btn-outline-primary w-100 mt-auto">
+                    Смотреть экскурсии →
+                </a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info text-center" role="alert">
+            Маршруты пока не добавлены. 
+            {% if user.is_staff %}
+                <a href="{% url 'main:admin_panel' %}" class="alert-link">Добавить маршрут</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
